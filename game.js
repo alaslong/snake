@@ -110,6 +110,7 @@ class Game {
 
         this.food.forEach(apple => {
             if (this.player.didCollide(apple)) {
+                console.log(`got an apple`);
                 apple.remove();
             }
         })
