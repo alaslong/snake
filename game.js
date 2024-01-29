@@ -77,7 +77,7 @@ class Game {
         this.player = new Snake(this.gameScreen, 230, 500, 20, 20, `/circle.png`);
     }
 
-    star () {
+    start () {
 
         this.gameScreen.style.height = `${this.height}px`;
         this.gameScreen.style.width = `${this.width}px`;
@@ -198,7 +198,7 @@ class Snake {
     }
 
     grow () {
-        
+
     }
 }
 
