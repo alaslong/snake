@@ -22,27 +22,27 @@ window.onload = () => {
         switch (key.code) {
 
             case `ArrowUp`:
-                if (game.player.directionY) break;
-                game.player.directionX = 0;
-                game.player.directionY = -20;
+                if (game.snake.directionY) break;
+                game.snake.directionX = 0;
+                game.snake.directionY = -20;
                 break;
 
             case `ArrowDown`:
-                if (game.player.directionY) break;
-                game.player.directionX = 0;
-                game.player.directionY = 20;
+                if (game.snake.directionY) break;
+                game.snake.directionX = 0;
+                game.snake.directionY = 20;
                 break;
 
             case `ArrowLeft`:
-                if (game.player.directionX) break;
-                game.player.directionY = 0;
-                game.player.directionX = -20;
+                if (game.snake.directionX) break;
+                game.snake.directionY = 0;
+                game.snake.directionX = -20;
                 break;
 
             case `ArrowRight`:
-                if (game.player.directionX) break;
-                game.player.directionY = 0;
-                game.player.directionX = 20;
+                if (game.snake.directionX) break;
+                game.snake.directionY = 0;
+                game.snake.directionX = 20;
                 break;
         }
     })
@@ -55,7 +55,6 @@ window.onload = () => {
     })
 }
 
-
 // define game
 class Game {
 
@@ -65,8 +64,9 @@ class Game {
         this.gameScreen = document.querySelector(`#game-screen`);
         this.gameEndScreen = document.querySelector(`#game-end`);
         this.height = 500;
-        this.width = 500
+        this.width = 500;
         this.food = [];
+        this.snakeArr = []
         this.score = 0;
         this.lives = 3;
         this.gameIsOver = false;
@@ -74,10 +74,11 @@ class Game {
         this.gameLoopFrequency = Math.round(1000 / 3);
         this.counter = 0;
 
-        this.player = new Snake(this.gameScreen, 230, 500, 20, 20, `/circle.png`);
+        this.snakeArr.push(this.snake = new Snake(this.gameScreen, 230, 500, 20, 20, `/circle.png`));
+        this.snakeHead = this.snakeArr[0];
     }
 
-    start () {
+    start() {
 
         this.gameScreen.style.height = `${this.height}px`;
         this.gameScreen.style.width = `${this.width}px`;
@@ -90,7 +91,7 @@ class Game {
         }, this.gameLoopFrequency)
     }
 
-    gameLoop () {
+    gameLoop() {
 
         this.update();
 
@@ -99,27 +100,45 @@ class Game {
         }
     }
 
-    update () {
-        
+    update() {
+
         this.counter++;
-        this.player.move();
+        this.snake.move();
+        console.log(this.snakeArr);
 
         if (this.counter === 1 || this.counter % 15 === 0) {
             this.food.push(new Food(this.gameScreen));
         }
 
         this.food.forEach(apple => {
-            if (this.player.didCollide(apple)) {
+            if (this.snakeArr[0].didCollide(apple)) {
                 console.log(`got an apple`);
                 apple.remove();
+                this.snakeArr.push(this.snake.grow());
             }
         })
+
+
+
+        if (this.snakeArr.length > 0) {
+
+            for (let i = this.snakeArr.length; i > 1; i--) {
+
+                setTimeout(() => {
+                    this.snakeArr[i-1].element.style.left = this.snakeArr[i-2].element.style.left;
+                    this.snakeArr[i-1].element.style.top = this.snakeArr[i-2].element.style.top;
+                }, 300);
+
+
+            }
+        }
+
 
     }
 }
 
 
-// define snake (player)
+// define Snake class
 class Snake {
 
     constructor(gameScreen, left, top, width, height, imgSrc) {
@@ -141,14 +160,17 @@ class Snake {
         this.element.style.left = `${left}px`;
         this.element.style.top = `${top}px`;
 
-        this.gameScreen.appendChild(this.element);
+        this.element = this.gameScreen.appendChild(this.element);
+
     }
 
-    move () {
+    move() {
 
         // update snake position/direction based on directionX and directionY
         this.left += this.directionX;
         this.top += this.directionY;
+
+
 
         // ensure snake stays within the game screen
         // handles left hand side
@@ -171,14 +193,22 @@ class Snake {
             this.top = this.gameScreen.offsetHeight - this.height - 10;
         }
 
-        // Update the player's car position on the screen
+
+
+        // Update the snake's position on the screen
         this.updatePosition();
     }
 
     updatePosition() {
 
+
+
         this.element.style.left = `${this.left}px`;
         this.element.style.top = `${this.top}px`;
+
+
+
+
     }
 
     didCollide(food) {
@@ -198,16 +228,21 @@ class Snake {
         }
     }
 
-    grow () {
+    grow() {
+
+        const newBodyPart = new Snake(this.gameScreen, 230, 500, 20, 20, `/circle.png`)
+        return newBodyPart;
 
     }
+
 }
+
 
 //define food class
 class Food {
 
-    constructor (gameScreen) {
-        
+    constructor(gameScreen) {
+
         this.gameScreen = gameScreen;
         this.left = Math.floor(Math.random() * 300 + 70);
         this.top = Math.floor(Math.random() * 300 + 70);
@@ -216,7 +251,7 @@ class Food {
         this.element = document.createElement(`img`);
 
         this.element.src = `/apple.png`;
-        this.element.style.position =  `absolute`;
+        this.element.style.position = `absolute`;
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.height}px`;
         this.element.style.left = `${this.left}px`;
@@ -225,7 +260,7 @@ class Food {
         this.gameScreen.appendChild(this.element);
     }
 
-    remove () {
+    remove() {
         this.gameScreen.removeChild(this.element);
     }
 
