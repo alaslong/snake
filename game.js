@@ -53,6 +53,13 @@ window.onload = () => {
 
         startGame();
     })
+
+    restartButton.addEventListener(`click`, () => {
+
+        game.gameEndScreen.style.display = `none`;
+        game.startScreen.style.display = `block`;
+        
+    })
 }
 
 // define game
@@ -66,12 +73,12 @@ class Game {
         this.height = 500;
         this.width = 500;
         this.food = [];
-        this.snakeArr = []
+        this.snakeArr = [];
         this.score = 0;
         this.lives = 3;
         this.gameIsOver = false;
         this.gameIntervalId = null;
-        this.gameLoopFrequency = Math.round(1000 / 3);
+        this.gameLoopFrequency = 200;
         this.counter = 0;
 
         this.snakeArr.push(this.snake = new Snake(this.gameScreen, 230, 500, 20, 20, `/circle.png`));
@@ -104,7 +111,6 @@ class Game {
 
         this.counter++;
         this.snake.move();
-        console.log(this.snakeArr);
 
         if (this.counter === 1 || this.counter % 15 === 0) {
             this.food.push(new Food(this.gameScreen));
@@ -114,9 +120,24 @@ class Game {
             if (this.snakeArr[0].didCollide(apple)) {
                 console.log(`got an apple`);
                 apple.remove();
-                this.snakeArr.push(this.snake.grow());
+                const lastLeft = parseInt(this.snakeArr[this.snakeArr.length-1].element.style.left);
+                const lastTop = parseInt(this.snakeArr[this.snakeArr.length-1].element.style.top);
+
+                setTimeout(() => {
+                    this.snakeArr.push(this.snake.grow(lastLeft, lastTop));
+                }, 170)
             }
+
+            
         })
+
+        this.snakeArr.slice(1).forEach(x => {
+            if (this.snakeArr[0].didCollide(x)) {
+                this.endGame();
+            }
+
+        })
+        
 
 
 
@@ -127,13 +148,19 @@ class Game {
                 setTimeout(() => {
                     this.snakeArr[i-1].element.style.left = this.snakeArr[i-2].element.style.left;
                     this.snakeArr[i-1].element.style.top = this.snakeArr[i-2].element.style.top;
-                }, 300);
+                }, 170);
 
 
             }
         }
 
 
+    }
+
+    endGame() {
+        this.gameIsOver = true;
+        this.gameScreen.style.display = `none`;
+        this.gameEndScreen.style.display = `block`;
     }
 }
 
@@ -201,26 +228,21 @@ class Snake {
 
     updatePosition() {
 
-
-
         this.element.style.left = `${this.left}px`;
         this.element.style.top = `${this.top}px`;
 
-
-
-
     }
 
-    didCollide(food) {
+    didCollide(arg) {
 
         const snakeHeadRect = this.element.getBoundingClientRect();
-        const foodRect = food.element.getBoundingClientRect();
+        const argRect = arg.element.getBoundingClientRect();
 
         if (
-            snakeHeadRect.left < foodRect.right &&
-            snakeHeadRect.right > foodRect.left &&
-            snakeHeadRect.top < foodRect.bottom &&
-            snakeHeadRect.bottom > foodRect.top
+            snakeHeadRect.left < argRect.right &&
+            snakeHeadRect.right > argRect.left &&
+            snakeHeadRect.top < argRect.bottom &&
+            snakeHeadRect.bottom > argRect.top
         ) {
             return true;
         } else {
@@ -228,9 +250,10 @@ class Snake {
         }
     }
 
-    grow() {
+    grow(left, top) {
 
-        const newBodyPart = new Snake(this.gameScreen, 230, 500, 20, 20, `/circle.png`)
+        const newBodyPart = new Snake(this.gameScreen, left, top, 20, 20, `/circle.png`)
+        
         return newBodyPart;
 
     }
@@ -244,8 +267,8 @@ class Food {
     constructor(gameScreen) {
 
         this.gameScreen = gameScreen;
-        this.left = Math.floor(Math.random() * 300 + 70);
-        this.top = Math.floor(Math.random() * 300 + 70);
+        this.left = Math.floor(Math.random() * 490) + 10;
+        this.top = Math.floor(Math.random() * 490) + 10;
         this.width = 20;
         this.height = 20;
         this.element = document.createElement(`img`);
