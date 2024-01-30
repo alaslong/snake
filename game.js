@@ -3,10 +3,11 @@ window.onload = () => {
 
     const startButton = document.getElementById(`start-button`);
     const restartButton = document.getElementById(`restart-button`);
+
     let game = null;
 
 
-    // define startGame function
+    // define function startGame
     const startGame = () => {
 
         console.log(`Game started`);
@@ -48,12 +49,10 @@ window.onload = () => {
     })
 
 
-    // add event listener to start game 
-    startButton.addEventListener(`click`, () => {
+    // add event listener to start game button
+    startButton.addEventListener(`click`, startGame);
 
-        startGame();
-    })
-
+    // add event listener to restart game button
     restartButton.addEventListener(`click`, () => {
 
         game.gameEndScreen.style.display = `none`;
@@ -62,7 +61,7 @@ window.onload = () => {
     })
 }
 
-// define game
+// define class Game
 class Game {
 
     constructor() {
@@ -85,6 +84,7 @@ class Game {
         this.snakeHead = this.snakeArr[0];
     }
 
+    // starts setInterval to loop through game functions
     start() {
 
         this.gameScreen.style.height = `${this.height}px`;
@@ -98,6 +98,7 @@ class Game {
         }, this.gameLoopFrequency)
     }
 
+    // checks whether game has ended
     gameLoop() {
 
         this.update();
@@ -107,22 +108,30 @@ class Game {
         }
     }
 
+    // updates game information
     update() {
 
+        // counter is used to generate apples
         this.counter++;
         this.snake.move();
 
-        if (this.counter === 1 || this.counter % 15 === 0) {
+        // apples are generated on the first loop, and every 20 loops
+        if (this.counter === 1 || this.counter % 20 === 0) {
             this.food.push(new Food(this.gameScreen));
         }
 
+        // loops through each apple to check if collision with snake's head (snakeArr[0]) has occured
         this.food.forEach(apple => {
             if (this.snakeArr[0].didCollide(apple)) {
-                console.log(`got an apple`);
+
+                // if yes, the apple is removed from gameScreen
                 apple.remove();
+
+                // these variables store the most recent location of the last part of the snake
                 const lastLeft = parseInt(this.snakeArr[this.snakeArr.length-1].element.style.left);
                 const lastTop = parseInt(this.snakeArr[this.snakeArr.length-1].element.style.top);
 
+                // a delay is used to prevent didCollide from registering a collision between the snake's head and the rest of the body
                 setTimeout(() => {
                     this.snakeArr.push(this.snake.grow(lastLeft, lastTop));
                 }, 170)
@@ -131,18 +140,20 @@ class Game {
             
         })
 
+        // the slice method is appled on snakeArr to prevent didCollide registering a collision between snakeArr[0] and itself
         this.snakeArr.slice(1).forEach(x => {
+
+            // if snakeArr[0] touches another element of snakeArr, the endGame function is called
             if (this.snakeArr[0].didCollide(x)) {
                 this.endGame();
             }
 
         })
         
-
-
-
+        // checks if snakeArr containe more than just the snake's head
         if (this.snakeArr.length > 0) {
 
+            //if so, cycle through each element of the snakeArr (starting from the end), and move each element to the location of the one preceeding it
             for (let i = this.snakeArr.length; i > 1; i--) {
 
                 setTimeout(() => {
@@ -157,6 +168,7 @@ class Game {
 
     }
 
+    // endGame function triggers clearInterval and switches to the gameEndScreen div
     endGame() {
         this.gameIsOver = true;
         this.gameScreen.style.display = `none`;
@@ -165,7 +177,7 @@ class Game {
 }
 
 
-// define Snake class
+// define class Snake
 class Snake {
 
     constructor(gameScreen, left, top, width, height, imgSrc) {
@@ -191,41 +203,36 @@ class Snake {
 
     }
 
+    //note: the following only applies to snakeArr[0]
     move() {
 
-        // update snake position/direction based on directionX and directionY
+        // update snakeArr[0]'s next position by adding directionX/directionY to it's current top/left values
         this.left += this.directionX;
         this.top += this.directionY;
 
 
 
         // ensure snake stays within the game screen
-        // handles left hand side
-        if (this.left < 10) {
+        if (this.left < 10) { //left
             this.left = 10;
         }
 
-        // handles top side
-        if (this.top < 10) {
+        if (this.top < 10) { //top
             this.top = 10;
         }
 
-        // handles right hand side
-        if (this.left > this.gameScreen.offsetWidth - this.width - 10) {
+        if (this.left > this.gameScreen.offsetWidth - this.width - 10) { //right
             this.left = this.gameScreen.offsetWidth - this.width - 10;
         }
 
-        // handles bottom side
-        if (this.top > this.gameScreen.offsetHeight - this.height - 10) {
+        if (this.top > this.gameScreen.offsetHeight - this.height - 10) { //bottom
             this.top = this.gameScreen.offsetHeight - this.height - 10;
         }
 
-
-
-        // Update the snake's position on the screen
         this.updatePosition();
     }
 
+    // update the position of snakeArr[0] on the screen
     updatePosition() {
 
         this.element.style.left = `${this.left}px`;
@@ -233,6 +240,7 @@ class Snake {
 
     }
 
+    // check for collision
     didCollide(arg) {
 
         const snakeHeadRect = this.element.getBoundingClientRect();
@@ -250,6 +258,7 @@ class Snake {
         }
     }
 
+    // returns a new part of the snake based on the current location of the end of the snake (which is pushed to snakeArr)
     grow(left, top) {
 
         const newBodyPart = new Snake(this.gameScreen, left, top, 20, 20, `/circle.png`)
@@ -261,18 +270,21 @@ class Snake {
 }
 
 
-//define food class
+// define class Food
 class Food {
 
     constructor(gameScreen) {
 
         this.gameScreen = gameScreen;
+
+        //randomly generate the next location for an apple
         this.left = Math.floor(Math.random() * 490) + 10;
         this.top = Math.floor(Math.random() * 490) + 10;
+
+        // define size of apple 
         this.width = 20;
         this.height = 20;
         this.element = document.createElement(`img`);
-
         this.element.src = `/apple.png`;
         this.element.style.position = `absolute`;
         this.element.style.width = `${this.width}px`;
@@ -280,9 +292,11 @@ class Food {
         this.element.style.left = `${this.left}px`;
         this.element.style.top = `${this.top}px`;
 
+        // adds apple to the gameScreen
         this.gameScreen.appendChild(this.element);
     }
 
+    // removes apple from gameScreen following collision
     remove() {
         this.gameScreen.removeChild(this.element);
     }
