@@ -93,8 +93,10 @@ class Game {
             //if so, cycle through each element of the snakeArr (starting from the end), and move each element to the location of the one preceeding it
             for (let i = this.snakeArr.length; i > 1; i--) {
 
+                //delay to prevent snakeArr elements from overlapping
                 setTimeout(() => {
-                    this.snakeArr[i-1].element.style.left = this.snakeArr[i-2].element.style.left;
+                    this.snakeArr[i-1].element.
+                    style.left = this.snakeArr[i-2].element.style.left;
                     this.snakeArr[i-1].element.style.top = this.snakeArr[i-2].element.style.top;
                 }, 170);
 
@@ -107,9 +109,13 @@ class Game {
 
     // endGame function triggers clearInterval and switches to the gameEndScreen div
     endGame() {
+
         this.gameIsOver = true;
+        this.snakeArr = [];
+        this.food = [];
         this.gameScreen.style.display = `none`;
         this.gameEndScreen.style.display = `block`;
+        this.gameScreen.innerHTML = ``;
     }
 }
 

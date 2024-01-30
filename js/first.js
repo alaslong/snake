@@ -60,5 +60,7 @@ window.onload = () => {
 
         game.gameEndScreen.style.display = `none`;
         game.startScreen.style.display = `block`;
+        game = null;
+        startGame();
     })
 }
