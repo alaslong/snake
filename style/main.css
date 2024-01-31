@@ -28,6 +28,20 @@ body {
     display: none;
 }
 
-#snake-head {
-    background-color: pink;
+
+
+.up {
+    transform: rotate(0);
+}
+
+.down {
+    transform: rotate(180deg);
+}
+
+.right {
+    transform: rotate(90deg);
+}
+
+.left {
+    transform: rotate(270deg);
 }

@@ -1,7 +1,7 @@
 // define class Snake
 class Snake {
 
-    constructor(gameScreen, left, top, width, height, imgSrc) {
+    constructor(gameScreen, left, top, width, height, imgSrc, styleId, styleClass) {
 
         this.gameScreen = gameScreen;
         this.left = left;
@@ -20,12 +20,15 @@ class Snake {
         this.element.style.left = `${left}px`;
         this.element.style.top = `${top}px`;
 
+        if (styleId) this.element.setAttribute(`id`, styleId);
+        if (styleClass) this.element.setAttribute(`class`, styleClass);
+
         this.element = this.gameScreen.appendChild(this.element);
 
     }
 
     //note: the following only applies to snakeArr[0]
-    move() {
+    move(directionArg) {
 
         // update snakeArr[0]'s next position by adding directionX/directionY to it's current top/left values
         this.left += this.directionX;
@@ -34,30 +37,32 @@ class Snake {
 
 
         // ensure snake stays within the game screen
-        if (this.left < 10) { //left
-            this.left = 10;
+        if (this.left < 5) { //left
+            this.left = 5;
         }
 
-        if (this.top < 10) { //top
-            this.top = 10;
+        if (this.top < 5) { //top
+            this.top = 5;
         }
 
-        if (this.left > this.gameScreen.offsetWidth - this.width - 10) { //right
-            this.left = this.gameScreen.offsetWidth - this.width - 10;
+        if (this.left > this.gameScreen.offsetWidth - this.width - 5) { //right
+            this.left = this.gameScreen.offsetWidth - this.width - 5;
         }
 
-        if (this.top > this.gameScreen.offsetHeight - this.height - 10) { //bottom
-            this.top = this.gameScreen.offsetHeight - this.height - 10;
+        if (this.top > this.gameScreen.offsetHeight - this.height - 5) { //bottom
+            this.top = this.gameScreen.offsetHeight - this.height - 5;
         }
 
-        this.updatePosition();
+        this.updatePosition(directionArg);
     }
 
     // update the position of snakeArr[0] on the screen
-    updatePosition() {
+    updatePosition(arg) {
 
         this.element.style.left = `${this.left}px`;
         this.element.style.top = `${this.top}px`;
+
+        if (arg) this.element.setAttribute(`class`, `snake ${arg}`);
 
     }
 
@@ -82,7 +87,7 @@ class Snake {
     // returns a new part of the snake based on the current location of the end of the snake (which is pushed to snakeArr)
     grow(left, top) {
 
-        const newBodyPart = new Snake(this.gameScreen, left, top, 20, 20, `images/circle.png`)
+        const newBodyPart = new Snake(this.gameScreen, left, top, 20, 20, `images/body.png`, ``, `snake`);
         
         return newBodyPart;
 

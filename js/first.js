@@ -27,6 +27,7 @@ window.onload = () => {
                 if (game.snake.directionY) break;
                 game.snake.directionX = 0;
                 game.snake.directionY = -20;
+                game.direction = `up`;
                 break;
 
             case `ArrowDown`:
@@ -34,6 +35,7 @@ window.onload = () => {
                 if (game.snake.directionY) break;
                 game.snake.directionX = 0;
                 game.snake.directionY = 20;
+                game.direction = `down`;
                 break;
 
             case `ArrowLeft`:
@@ -41,6 +43,7 @@ window.onload = () => {
                 if (game.snake.directionX) break;
                 game.snake.directionY = 0;
                 game.snake.directionX = -20;
+                game.direction = `left`;
                 break;
 
             case `ArrowRight`:
@@ -48,6 +51,7 @@ window.onload = () => {
                 if (game.snake.directionX) break;
                 game.snake.directionY = 0;
                 game.snake.directionX = 20;
+                game.direction = `right`;
                 break;
         }
     })

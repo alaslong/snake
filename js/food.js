@@ -6,8 +6,8 @@ class Food {
         this.gameScreen = gameScreen;
 
         //randomly generate the next location for an apple
-        this.left = Math.floor(Math.random() * 490) + 10;
-        this.top = Math.floor(Math.random() * 490) + 10;
+        this.left = Math.floor(Math.random() * 480) + 20;
+        this.top = Math.floor(Math.random() * 480) + 20;
 
         // define size of apple 
         this.width = 20;
