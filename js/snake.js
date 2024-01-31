@@ -82,7 +82,7 @@ class Snake {
     // returns a new part of the snake based on the current location of the end of the snake (which is pushed to snakeArr)
     grow(left, top) {
 
-        const newBodyPart = new Snake(this.gameScreen, left, top, 20, 20, `/images/circle.png`)
+        const newBodyPart = new Snake(this.gameScreen, left, top, 20, 20, `images/circle.png`)
         
         return newBodyPart;
 

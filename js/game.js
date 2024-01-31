@@ -17,7 +17,7 @@ class Game {
         this.gameLoopFrequency = 200;
         this.counter = 0;
 
-        this.snakeArr.push(this.snake = new Snake(this.gameScreen, 230, 500, 20, 20, `/images/circle.png`));
+        this.snakeArr.push(this.snake = new Snake(this.gameScreen, 230, 500, 20, 20, `images/circle.png`));
         this.snakeHead = this.snakeArr[0];
     }
 

@@ -13,7 +13,7 @@ class Food {
         this.width = 20;
         this.height = 20;
         this.element = document.createElement(`img`);
-        this.element.src = `/images/apple.png`;
+        this.element.src = `images/apple.png`;
         this.element.style.position = `absolute`;
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.height}px`;
