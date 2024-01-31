@@ -26,7 +26,7 @@ window.onload = () => {
 
                 if (game.snake.directionY) break;
                 game.snake.directionX = 0;
-                game.snake.directionY = -15;
+                game.snake.directionY = -4.0588;
                 game.direction = `up`;
                 break;
 
@@ -34,7 +34,7 @@ window.onload = () => {
 
                 if (game.snake.directionY) break;
                 game.snake.directionX = 0;
-                game.snake.directionY = 15;
+                game.snake.directionY = 4.0588;
                 game.direction = `down`;
                 break;
 
@@ -42,7 +42,7 @@ window.onload = () => {
 
                 if (game.snake.directionX) break;
                 game.snake.directionY = 0;
-                game.snake.directionX = -15;
+                game.snake.directionX = -3;
                 game.direction = `left`;
                 break;
 
@@ -50,7 +50,7 @@ window.onload = () => {
                 
                 if (game.snake.directionX) break;
                 game.snake.directionY = 0;
-                game.snake.directionX = 15;
+                game.snake.directionX = 3;
                 game.direction = `right`;
                 break;
         }
@@ -63,7 +63,8 @@ window.onload = () => {
     restartButton.addEventListener(`click`, () => {
 
         game.gameEndScreen.style.display = `none`;
-        game.startScreen.style.display = `block`;
+        game.gameScreen.style.display = `block`;
+        game.startScreen.style.display = `flex`;
         game = null;
         startGame();
     })

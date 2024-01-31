@@ -6,29 +6,27 @@ class Game {
         this.startScreen = document.querySelector(`#game-intro`);
         this.gameScreen = document.querySelector(`#game-screen`);
         this.gameEndScreen = document.querySelector(`#game-end`);
-        this.height = 500;
-        this.width = 800;
+
         this.food = [];
         this.snakeArr = [];
         this.score = 0;
         this.gameIsOver = false;
         this.gameIntervalId = null;
-        this.gameLoopFrequency = 200;
+        this.gameLoopFrequency = 180;
         this.counter = 0;
         this.direction = null;
 
-        this.snakeArr.push(this.snake = new Snake(this.gameScreen, 400, 250, 15, 15, `images/head.png`, `snake-head`, `snake`));
+
+
+        this.snakeArr.push(this.snake = new Snake(this.gameScreen, 3, 4.0588, `images/head.png`, `snake-head`, `snake`, ``, ``));
         this.snakeHead = this.snakeArr[0];
     }
 
     // starts setInterval to loop through game functions
     start() {
 
-        this.gameScreen.style.height = `${this.height}px`;
-        this.gameScreen.style.width = `${this.width}px`;
-
         this.startScreen.style.display = `none`;
-        this.gameScreen.style.display = `block`;
+        console.log(this.gameScreen.clientHeight)
 
         this.gameIntervalId = setInterval(() => {
             this.gameLoop();
@@ -48,9 +46,11 @@ class Game {
     // updates game information
     update() {
 
+
         // counter is used to generate apples
         this.counter++;
-        this.snake.move(this.direction);
+
+        this.snakeHead.move(this.direction);
 
         // apples are generated on the first loop, and every 30 loops
         if (this.counter === 1 || this.counter % 30 === 0) {
@@ -66,17 +66,19 @@ class Game {
                 this.score++;
 
                 // these variables store the most recent location of the last part of the snake
-                const lastLeft = parseInt(this.snakeArr[this.snakeArr.length-1].element.style.left);
-                const lastTop = parseInt(this.snakeArr[this.snakeArr.length-1].element.style.top);
+                const lastLeft = parseInt(this.snakeArr[this.snakeArr.length - 1].element.style.left);
 
-                // a delay is used to prevent didCollide from registering a collision between the snake's head and the rest of the body
+                const lastTop = parseInt(this.snakeArr[this.snakeArr.length - 1].element.style.top);
+
+                // a delay is used to prevent didCollide from registering a collision between the existing snake head/body and the newly added segment
                 setTimeout(() => {
                     this.snakeArr.push(this.snake.grow(lastLeft, lastTop));
                 }, 0)
             }
 
-            
+
         })
+
 
         // the slice method is appled on snakeArr to prevent didCollide registering a collision between snakeHead and itself
         this.snakeArr.slice(1).forEach(x => {
@@ -87,7 +89,7 @@ class Game {
             }
 
         })
-        
+
         // checks if snakeArr containe more than just the snake's head
         if (this.snakeArr.length > 0) {
 
@@ -96,10 +98,10 @@ class Game {
 
                 // timeout to prevent elements from overlapping
                 setTimeout(() => {
-                    this.snakeArr[i-1].element.
-                    style.left = this.snakeArr[i-2].element.style.left;
-                    this.snakeArr[i-1].element.style.top = this.snakeArr[i-2].element.style.top;
-                }, 190)
+                    this.snakeArr[i - 1].element.
+                        style.left = this.snakeArr[i - 2].element.style.left;
+                    this.snakeArr[i - 1].element.style.top = this.snakeArr[i - 2].element.style.top;
+                }, 170)
 
             }
         }
@@ -111,8 +113,12 @@ class Game {
 
         this.gameIsOver = true;
         this.gameScreen.style.display = `none`;
-        this.gameEndScreen.style.display = `block`;
-        this.gameScreen.innerHTML = ``;
+        this.gameScreen.innerHTML = `
+        <div id="game-intro" class="screen flex">
+        <p>This is the game start screen</p>
+        <button id="start-button">Start Game</button>
+        `;
+        this.gameEndScreen.style.display = `flex`;
     }
 }
 

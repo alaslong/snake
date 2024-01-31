@@ -6,19 +6,19 @@ class Food {
         this.gameScreen = gameScreen;
 
         //randomly generate the next location for an apple
-        this.left = Math.floor(Math.random() * 480) + 20;
-        this.top = Math.floor(Math.random() * 480) + 20;
+        const left = Math.floor(Math.random() * 90) + 10;
+        const top = Math.floor(Math.random() * 90) + 10;
 
         // define size of apple 
-        this.width = 15;
-        this.height = 15;
+        this.width = 3;
+        this.height = 4.0588;
         this.element = document.createElement(`img`);
         this.element.src = `images/apple.png`;
         this.element.style.position = `absolute`;
-        this.element.style.width = `${this.width}px`;
-        this.element.style.height = `${this.height}px`;
-        this.element.style.left = `${this.left}px`;
-        this.element.style.top = `${this.top}px`;
+        this.element.style.width = `${this.width}%`;
+        this.element.style.height = `${this.height}%`;
+        this.element.style.left = `${left}%`;
+        this.element.style.top = `${top}%`;
 
         // adds apple to the gameScreen
         this.gameScreen.appendChild(this.element);

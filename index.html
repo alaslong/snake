@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" type="text/css" href="style/main.css">
     <title>Snake Game</title>
     <script type="text/javascript" src="js/first.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
@@ -16,19 +16,22 @@
 
 
     <div id="game-container">
+
+
         
-        <div id="game-intro">
-            <p>This is the game start screen</p>
-            <button id="start-button">Start Game</button>
-        </div>
-        
-        <div id="game-screen">
-            <p>This is the game screen</p>
+        <div id="game-screen" class="screen">
+            <div id="game-intro" class="screen flex">
+                <p>This is the game start screen</p>
+                <button id="start-button">Start Game</button>
+            </div>
+
         </div>
 
-        <div id="game-end">
+        <div id="game-end" class="screen flex">
             <button id="restart-button">Restart Game</button>
         </div>
+
+
 
     </div>
 
