@@ -37,20 +37,20 @@ class Snake {
 
 
         // ensure snake stays within the game screen
-        if (this.left < 5) { //left
-            this.left = 5;
+        if (this.left < 0) { //left
+            this.left = 0;
         }
 
-        if (this.top < 5) { //top
-            this.top = 5;
+        if (this.top < 0) { //top
+            this.top = 0;
         }
 
-        if (this.left > this.gameScreen.offsetWidth - this.width - 5) { //right
-            this.left = this.gameScreen.offsetWidth - this.width - 5;
+        if (this.left > this.gameScreen.offsetWidth - this.width - 0) { //right
+            this.left = this.gameScreen.offsetWidth - this.width - 0;
         }
 
-        if (this.top > this.gameScreen.offsetHeight - this.height - 5) { //bottom
-            this.top = this.gameScreen.offsetHeight - this.height - 5;
+        if (this.top > this.gameScreen.offsetHeight - this.height - 0) { //bottom
+            this.top = this.gameScreen.offsetHeight - this.height - 0;
         }
 
         this.updatePosition(directionArg);
@@ -87,7 +87,7 @@ class Snake {
     // returns a new part of the snake based on the current location of the end of the snake (which is pushed to snakeArr)
     grow(left, top) {
 
-        const newBodyPart = new Snake(this.gameScreen, left, top, 20, 20, `images/body.png`, ``, `snake`);
+        const newBodyPart = new Snake(this.gameScreen, left, top, 15, 15, `images/body.png`, ``, `snake`);
         
         return newBodyPart;
 

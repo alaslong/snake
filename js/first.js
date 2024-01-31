@@ -26,7 +26,7 @@ window.onload = () => {
 
                 if (game.snake.directionY) break;
                 game.snake.directionX = 0;
-                game.snake.directionY = -20;
+                game.snake.directionY = -15;
                 game.direction = `up`;
                 break;
 
@@ -34,7 +34,7 @@ window.onload = () => {
 
                 if (game.snake.directionY) break;
                 game.snake.directionX = 0;
-                game.snake.directionY = 20;
+                game.snake.directionY = 15;
                 game.direction = `down`;
                 break;
 
@@ -42,7 +42,7 @@ window.onload = () => {
 
                 if (game.snake.directionX) break;
                 game.snake.directionY = 0;
-                game.snake.directionX = -20;
+                game.snake.directionX = -15;
                 game.direction = `left`;
                 break;
 
@@ -50,7 +50,7 @@ window.onload = () => {
                 
                 if (game.snake.directionX) break;
                 game.snake.directionY = 0;
-                game.snake.directionX = 20;
+                game.snake.directionX = 15;
                 game.direction = `right`;
                 break;
         }

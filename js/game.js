@@ -7,7 +7,7 @@ class Game {
         this.gameScreen = document.querySelector(`#game-screen`);
         this.gameEndScreen = document.querySelector(`#game-end`);
         this.height = 500;
-        this.width = 500;
+        this.width = 800;
         this.food = [];
         this.snakeArr = [];
         this.score = 0;
@@ -17,7 +17,7 @@ class Game {
         this.counter = 0;
         this.direction = null;
 
-        this.snakeArr.push(this.snake = new Snake(this.gameScreen, 230, 500, 20, 20, `images/head.png`, `snake-head`, `snake`));
+        this.snakeArr.push(this.snake = new Snake(this.gameScreen, 400, 250, 15, 15, `images/head.png`, `snake-head`, `snake`));
         this.snakeHead = this.snakeArr[0];
     }
 
