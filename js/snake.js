@@ -43,10 +43,6 @@ class Snake {
         this.left += this.directionX;
         this.top += this.directionY;
 
-        console.log(this.gameScreen.width)
-
-
-
         // ensure snake stays within the game screen
         if (this.left < 0) { //left
             this.left = 0;

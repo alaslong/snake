@@ -13,7 +13,15 @@ window.onload = () => {
         console.log(`Game started`);
         game = new Game();
 
-        game.start();
+        game.start(); 
+    }
+
+    // define function resetGame
+    const resetGame = () => {
+        game.gameEndScreen.style.display = `none`;
+        game.gameScreen.style.display = `block`;
+        game.startScreen.style.display = `flex`;
+        game = null;
     }
 
 
@@ -21,6 +29,18 @@ window.onload = () => {
     document.addEventListener("keydown", key => {
 
         switch (key.code) {
+
+            case `Space`:
+
+                if (game === null) {
+                    startGame();
+                    break;
+                } else if (game.gameIsOver) {
+                    resetGame();
+                    break;
+                } else if (game) {
+                    break;
+                }
 
             case `ArrowUp`:
 
@@ -59,13 +79,6 @@ window.onload = () => {
     // add event listener to start game button
     startButton.addEventListener(`click`, startGame);
 
-    // add event listener and functionality to restart game button
-    restartButton.addEventListener(`click`, () => {
-
-        game.gameEndScreen.style.display = `none`;
-        game.gameScreen.style.display = `block`;
-        game.startScreen.style.display = `flex`;
-        game = null;
-        startGame();
-    })
+    // add event listener and functionality to reset game button
+    restartButton.addEventListener(`click`, resetGame)
 }

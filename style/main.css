@@ -1,7 +1,14 @@
+@font-face {
+    font-family: nokia;
+    src: url("../font/nokia.ttf");
+}
+
 body {
     margin:0;
     padding: 0;
     text-align: center;
+    font-family: nokia;
+    font-size: 1.4em;
     
 }
 
@@ -13,7 +20,7 @@ body {
     margin: 0;
     justify-content: center;
     align-items: center;
-    background-image: url("../images/nokia.png");
+    background-image: url("../images/phone.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100vh;
@@ -21,21 +28,16 @@ body {
 
 #game-intro {
     display: flex;
-    outline: 10px black solid;
-    justify-content: center;
     flex-direction: column;
-    align-items: center;
 }
 
 #game-screen {
     position: relative;
-    border: 5px red solid;
     margin-top: 8vh;
 }
 
 #game-end {
     display: none;
-    outline: 10px yellow solid;
     margin-top: 8vh;
 }
 
@@ -75,4 +77,13 @@ body {
 
 .left {
     transform: rotate(270deg);
+}
+
+button {
+    margin-top: 6%;
+    padding: 2% 2%;
+    border: 4px black solid;
+    background-color: transparent;
+    font-family: nokia;
+    font-size: 0.8em;
 }

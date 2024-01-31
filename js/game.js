@@ -6,6 +6,7 @@ class Game {
         this.startScreen = document.querySelector(`#game-intro`);
         this.gameScreen = document.querySelector(`#game-screen`);
         this.gameEndScreen = document.querySelector(`#game-end`);
+        this.pointsText = document.querySelector(`#score`);
 
         this.food = [];
         this.snakeArr = [];
@@ -26,7 +27,6 @@ class Game {
     start() {
 
         this.startScreen.style.display = `none`;
-        console.log(this.gameScreen.clientHeight)
 
         this.gameIntervalId = setInterval(() => {
             this.gameLoop();
@@ -113,11 +113,18 @@ class Game {
 
         this.gameIsOver = true;
         this.gameScreen.style.display = `none`;
+
         this.gameScreen.innerHTML = `
         <div id="game-intro" class="screen flex">
-        <p>This is the game start screen</p>
-        <button id="start-button">Start Game</button>
+        <p>Control the snake using the arrow keys.</p>
+        <p>Eat the apples to grow.</p>
+        <p>Don't bite yourself. Don't go off screen.</p>
+        <button id="start-button">Click or press space to start</button>
+        </div>
         `;
+
+        this.score > 1 ? this.pointsText.innerText = `You got ${this.score} apples.` : this.pointsText.innerText = `You got ${this.score} apple.`
+
         this.gameEndScreen.style.display = `flex`;
     }
 }
