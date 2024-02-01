@@ -1,18 +1,26 @@
 @font-face {
-    font-family: nokia;
-    src: url("../font/nokia.ttf");
+    font-family: custom;
+    src: url("../font/custom.ttf");
 }
 
 body {
-    margin:0;
+
+    margin: 0;
     padding: 0;
+
     text-align: center;
-    font-family: nokia;
+    font-family: custom;
     font-size: 2.5vh;
     line-height: 1vh;
     background-color: #313646;
+    background-image: url("../images/phone.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100vh;
     
 }
+
+
 
 #game-container {
     display: flex;
@@ -22,14 +30,12 @@ body {
     margin: 0;
     justify-content: center;
     align-items: center;
-    background-image: url("../images/phone.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100vh;
+
 }
 
 #game-intro {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     padding-top: 4vh;
 }
@@ -87,6 +93,6 @@ button {
     padding: 2vh;
     border: 0.8vh black solid;
     background-color: transparent;
-    font-family: nokia;
+    font-family: custom;
     font-size: 0.9em;
 }
