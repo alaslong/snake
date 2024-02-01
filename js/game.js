@@ -17,8 +17,6 @@ class Game {
         this.counter = 0;
         this.direction = null;
 
-
-
         this.snakeArr.push(this.snake = new Snake(this.gameScreen, 3, 4.0588, `images/head.png`, `snake-head`, `snake`, ``, ``));
         this.snakeHead = this.snakeArr[0];
     }
@@ -41,7 +39,6 @@ class Game {
         if (this.gameIsOver) {
             clearInterval(this.gameIntervalId);
         }
-
 
     }
 
@@ -71,7 +68,7 @@ class Game {
                 this.gameIntervalId = setInterval(() => {
                     this.gameLoop();
                 }, this.gameLoopFrequency)
-                
+
 
                 // these variables store the most recent location of the last part of the snake
                 const lastLeft = parseInt(this.snakeArr[this.snakeArr.length - 1].element.style.left);
@@ -109,7 +106,7 @@ class Game {
                     this.snakeArr[i - 1].element.
                         style.left = this.snakeArr[i - 2].element.style.left;
                     this.snakeArr[i - 1].element.style.top = this.snakeArr[i - 2].element.style.top;
-                }, this.gameLoopFrequency-10)
+                }, this.gameLoopFrequency - 10)
 
             }
         }
