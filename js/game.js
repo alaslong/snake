@@ -129,7 +129,7 @@ class Game {
         </div>
         `;
 
-        this.score > 1 ? this.pointsText.innerText = `You got ${this.score} apples.` : this.pointsText.innerText = `You got ${this.score} apple.`
+        this.score > 1 ? this.pointsText.innerText = `You ate ${this.score} apples.` : this.pointsText.innerText = `You got ${this.score} apple.`
 
         this.gameEndScreen.style.display = `flex`;
     }
