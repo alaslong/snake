@@ -10,7 +10,7 @@ body {
 
     text-align: center;
     font-family: custom;
-    font-size: 2.5vh;
+    font-size: 2.4vh;
     line-height: 1vh;
     background-color: #313646;
     background-image: url("../images/phone.png");
@@ -43,7 +43,7 @@ img {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-top: 4vh;
+    padding-top: 3vh;
 }
 
 #game-screen {

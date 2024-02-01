@@ -41,6 +41,8 @@ class Game {
         if (this.gameIsOver) {
             clearInterval(this.gameIntervalId);
         }
+
+
     }
 
     // updates game information
@@ -64,6 +66,12 @@ class Game {
                 // if yes, the apple is removed from gameScreen
                 apple.remove();
                 this.score++;
+                this.gameLoopFrequency -= 10;
+                clearInterval(this.gameIntervalId);
+                this.gameIntervalId = setInterval(() => {
+                    this.gameLoop();
+                }, this.gameLoopFrequency)
+                
 
                 // these variables store the most recent location of the last part of the snake
                 const lastLeft = parseInt(this.snakeArr[this.snakeArr.length - 1].element.style.left);
@@ -101,7 +109,7 @@ class Game {
                     this.snakeArr[i - 1].element.
                         style.left = this.snakeArr[i - 2].element.style.left;
                     this.snakeArr[i - 1].element.style.top = this.snakeArr[i - 2].element.style.top;
-                }, 170)
+                }, this.gameLoopFrequency-10)
 
             }
         }
