@@ -8,7 +8,8 @@ body {
     padding: 0;
     text-align: center;
     font-family: nokia;
-    font-size: 1.4em;
+    font-size: 2.5vh;
+    line-height: 1vh;
     
 }
 
@@ -29,6 +30,7 @@ body {
 #game-intro {
     display: flex;
     flex-direction: column;
+    padding-top: 4vh;
 }
 
 #game-screen {
@@ -80,10 +82,10 @@ body {
 }
 
 button {
-    margin-top: 5%;
-    padding: 2% 2%;
-    border: 4px black solid;
+    margin: 4vh;
+    padding: 2vh;
+    border: 0.8vh black solid;
     background-color: transparent;
     font-family: nokia;
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
