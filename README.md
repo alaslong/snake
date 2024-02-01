@@ -8,7 +8,7 @@ The more apples you eat, you higher your score is.
 
 Control the direction of the snake using the arrow keys.
 
-*Note: You can not reverse direction. e.g. When moving vertically, you can only turn left/right & when moving horizontally, you can only turn upwards/downwards.*
+*Note: You cannot reverse direction. e.g. When moving vertically, you can only turn left/right & when moving horizontally, you can only turn upwards/downwards.*
 
 Each time you eat an apple, the snake will get longer. As the snake gets longer, the speed of the game will increase.
 
