@@ -12,6 +12,8 @@ Control the direction of the snake using the arrow keys.
 
 Each time you eat an apple, the snake will get longer. As the snake gets longer, the speed of the game will increase.
 
+Once you bump into yourself or reach the edge of the screen, the game ends and your score is displayed.
+
 # Demo
 
 You can play the game [here](https://alaslong.github.io/snake).
