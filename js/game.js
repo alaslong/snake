@@ -13,7 +13,7 @@ class Game {
         this.score = 0;
         this.gameIsOver = false;
         this.gameIntervalId = null;
-        this.gameLoopFrequency = 180;
+        this.gameLoopFrequency = null;
         this.counter = 0;
         this.direction = null;
 
@@ -25,6 +25,7 @@ class Game {
     start() {
 
         this.startScreen.style.display = `none`;
+        this.gameLoopFrequency = 180;
 
         this.gameIntervalId = setInterval(() => {
             this.gameLoop();
