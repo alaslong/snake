@@ -18,7 +18,7 @@ body {
     background-position: center;
     background-size: 100vh;
 
-    color: #111111;
+    color: #222222;
     
 }
 
@@ -62,7 +62,7 @@ img {
 }
 
 .snake-body {
-    background-color: black;
+    background-color: #222222;
 }
 
 .screen {
@@ -97,9 +97,9 @@ img {
 button {
     margin: 4vh;
     padding: 2vh;
-    border: 0.7vh #111111 solid;
+    border: 0.5vh #222222 solid;
     background-color: transparent;
     font-family: custom;
     font-size: 0.9em;
-    color: #111111;
+    color: #222222;
 }
