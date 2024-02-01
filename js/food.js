@@ -10,8 +10,8 @@ class Food {
         const top = Math.floor(Math.random() * 90) + 10;
 
         // define size of apple 
-        this.width = 3;
-        this.height = 4.0588;
+        this.width = 4.5;
+        this.height = 6.0882;
         this.element = document.createElement(`img`);
         this.element.src = `images/apple.png`;
         this.element.style.position = `absolute`;

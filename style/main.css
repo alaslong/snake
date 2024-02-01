@@ -17,7 +17,13 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100vh;
+
+    color: #111111;
     
+}
+
+img {
+    opacity: 70%;
 }
 
 
@@ -91,8 +97,9 @@ body {
 button {
     margin: 4vh;
     padding: 2vh;
-    border: 0.8vh black solid;
+    border: 0.7vh #111111 solid;
     background-color: transparent;
     font-family: custom;
     font-size: 0.9em;
+    color: #111111;
 }
