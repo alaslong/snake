@@ -103,3 +103,19 @@ button {
     font-size: 0.9em;
     color: #222222;
 }
+
+#credit {
+    position: absolute;
+    bottom: 1vh;
+    right: 1vh;
+    font-size: 1.2vh;
+
+}
+
+#credit a,
+#credit a:link,
+#credit a:active,
+#credit a:hover {
+    text-decoration: none;
+    color: #c3c3c3;
+}
